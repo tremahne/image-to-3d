@@ -27,7 +27,9 @@ def center_mesh(mesh: trimesh.Trimesh) -> trimesh.Trimesh:
 
 def clean_mesh(mesh: trimesh.Trimesh) -> trimesh.Trimesh:
     """Remove degenerate faces, merge duplicate vertices, fix normals."""
-    mesh.remove_degenerate_faces()
+    # Remove degenerate (zero-area) faces
+    mask = trimesh.triangles.nondegenerate(mesh.triangles, height=1e-12)
+    mesh.update_faces(mask)
     mesh.merge_vertices()
     trimesh.repair.fix_normals(mesh)
     trimesh.repair.fill_holes(mesh)

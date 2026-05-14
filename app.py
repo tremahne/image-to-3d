@@ -101,7 +101,7 @@ Convert images to STL files sized for the **Flashforge Adventurer 5M** (220×220
   The image is extruded into a bas-relief STL.
 """
 
-with gr.Blocks(title="image-to-3d", theme=gr.themes.Soft()) as app:
+with gr.Blocks(title="image-to-3d") as app:
     gr.Markdown(DESCRIPTION)
 
     with gr.Tabs():
@@ -124,7 +124,7 @@ with gr.Blocks(title="image-to-3d", theme=gr.themes.Soft()) as app:
                 with gr.Column():
                     photo_stl = gr.File(label="Download STL")
                     photo_log = gr.Textbox(label="Progress Log", lines=20,
-                                           interactive=False, show_copy_button=True)
+                                           interactive=False)
 
             photo_btn.click(
                 fn=run_photo_mode,
@@ -171,7 +171,7 @@ with gr.Blocks(title="image-to-3d", theme=gr.themes.Soft()) as app:
                 with gr.Column():
                     art_stl = gr.File(label="Download STL")
                     art_log = gr.Textbox(label="Progress Log", lines=12,
-                                         interactive=False, show_copy_button=True)
+                                         interactive=False)
 
             art_btn.click(
                 fn=run_artwork_mode,
@@ -181,4 +181,5 @@ with gr.Blocks(title="image-to-3d", theme=gr.themes.Soft()) as app:
             )
 
 if __name__ == "__main__":
-    app.launch(server_name="0.0.0.0", server_port=7860, inbrowser=True)
+    app.launch(server_name="0.0.0.0", server_port=7860, inbrowser=True,
+               theme=gr.themes.Soft())
